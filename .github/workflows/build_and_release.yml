@@ -1,0 +1,35 @@
+name: Build and Release EXE
+
+on:
+  push:
+    tags:
+      - 'v*.*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller pyautogui
+          pip install pyinstaller matplotlib scipy
+
+      - name: Build executable with PyInstaller
+        run: |
+          pyinstaller --noconfirm --onefile --windowed --icon=app_icon.ico --name BambooCO2OffsetCalculator BambooCO2OffsetCalculator.py  --hidden-import=pyautogui 
+
+      - name: Upload Release 
+        uses: softprops/action-gh-release@v1
+        with:
+          # Set the tag name to the current version
+          files: dist/BambooCO2OffsetCalculator.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
