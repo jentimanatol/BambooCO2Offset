@@ -18,7 +18,7 @@
 ## 🔽 Download
 
 📦 Grab the latest stable release:
-➡️ **[Download v2.1 for Windows (.exe)](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases/download/v2.1/BambooCO2OffsetCalculator.exe)**
+➡️ **[Download v1.1 for Windows (.exe)](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases/download/v1.1/BambooCO2OffsetCalculator.exe)**
 
 📁 Need older versions or want to check the source code?
 🔍 **[Browse all releases](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases)**
@@ -82,7 +82,7 @@
 
 ## 📷 Screenshot
 
-![App Screenshot](screenshots/Screenshot3.png)
+![App Screenshot](screenshots/Screenshot1.png)
 
 ---
 
