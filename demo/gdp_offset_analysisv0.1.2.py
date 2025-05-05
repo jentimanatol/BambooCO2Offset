@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import messagebox, filedialog
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -100,51 +101,23 @@ def compute_and_plot():
                            color=palette[2], alpha=0.9, edgecolor='black',
                            label='Annual Planting Cost (USD)')
 
-        # Annotations with text at the bottom of each bar at 45-degree rotation
-
-
-        # Add rotated labels BELOW each bar with explicit units
+        # Annotations
         for i, (land, bamboo, cost, percent, gdp_pct) in enumerate(zip(land_area, bamboo_area_needed_annually, planting_cost, percent_land, gdp_percentage)):
-            ax.text(x[i] - bar_width, 1, 
-                    f"{format_large_num(land)}\nsq mi", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', rotation=45, transform=ax.get_xaxis_transform())
-
-            ax.text(x[i], 1, 
-                    f"{format_large_num(bamboo)}\nsq mi/yr (bamboo)", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', rotation=45, transform=ax.get_xaxis_transform())
-
-            ax.text(x[i] + bar_width, 1, 
-                    f"${format_large_num(cost)}\n$/yr", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', rotation=45, transform=ax.get_xaxis_transform())
-
-            ax.text(x[i] + bar_width, 0.95, 
+            ax.text(x[i] - bar_width, land * 1.05, 
+                    f"{format_large_num(land)} sq mi", 
+                    ha='center', va='bottom', fontsize=10, fontweight='bold')
+            ax.text(x[i], bamboo * 1.05, 
+                    f"{format_large_num(bamboo)} sq mi/yr\n({percent:.2f}% of land)", 
+                    ha='center', va='bottom', fontsize=10, fontweight='bold',
+                    bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
+            ax.text(x[i] + bar_width, cost * 1.05, 
+                    f"${format_large_num(cost)}", 
+                    ha='center', va='bottom', fontsize=10, fontweight='bold',
+                    bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
+            ax.text(x[i] + bar_width, cost * 0.9, 
                     f"{gdp_pct:.2f}% of GDP", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', color='red',
-                    rotation=45, transform=ax.get_xaxis_transform())
-
-
-
-        # for i, (land, bamboo, cost, percent, gdp_pct) in enumerate(zip(land_area, bamboo_area_needed_annually, planting_cost, percent_land, gdp_percentage)):
-        #     ax.text(x[i] - bar_width, -land * 0.05, 
-        #             f"{format_large_num(land)} sq mi", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold', rotation=45)
-        #     ax.text(x[i], -bamboo * 0.05, 
-        #             f"{format_large_num(bamboo)} sq mi/yr\n({percent:.2f}% of land)", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold',
-        #             bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'), rotation=45)
-        #     ax.text(x[i] + bar_width, -cost * 0.05, 
-        #             f"${format_large_num(cost)}", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold',
-        #             bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'), rotation=45)
-        #     ax.text(x[i] + bar_width, -cost * 0.10, 
-        #             f"{gdp_pct:.2f}% of GDP", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold',
-        #             color='red', bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'), rotation=45)
-
-
-
-
-
+                    ha='center', va='bottom', fontsize=10, fontweight='bold',
+                    color='red', bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'))
 
         # Aesthetics
         ax.set_title(f"National Land vs. Bamboo Area Needed Annually and Planting Cost\nOffset CO₂ Emissions from {start_year} to {end_year}", 
@@ -163,7 +136,7 @@ def compute_and_plot():
             Patch(facecolor=palette[1], label='Annual Bamboo Area Needed', edgecolor='black'),
             Patch(facecolor=palette[2], label='Annual Planting Cost (USD)', edgecolor='black'),
         ]
-        ax.legend(handles=legend_elements, loc='lower right', fontsize=11)
+        ax.legend(handles=legend_elements, loc='upper right', fontsize=11)
 
         # Watermark
         ax.text(0.1, 0.7, 'BHCC 2025', fontsize=20, color='gray', alpha=0.5,
@@ -226,6 +199,12 @@ tk.Label(top_frame, text="🌿 Bamboo CO₂ Offset Calculator", bg="#e6f0ff", fo
 control_frame = tk.Frame(root, pady=10)
 control_frame.pack(fill=tk.X)
 
+
+
+
+
+
+
 # Input fields (same as old app)
 tk.Label(control_frame, text="Enter Countries (as Python list):", font=("Arial", 16)).pack(anchor="w", padx=10)
 country_input = tk.Text(control_frame, height=2, font=("Courier", 14), wrap=tk.NONE)
@@ -259,6 +238,10 @@ btn_frame.pack(pady=10)
 tk.Button(btn_frame, text="🔍 Analyze", command=compute_and_plot, font=("Arial", 16), bg="#007acc", fg="white").pack(side=tk.LEFT, padx=10)
 tk.Button(btn_frame, text="💾 Save Plot", command=save_plot, font=("Arial", 16), bg="#28a745", fg="white").pack(side=tk.LEFT, padx=10)
 tk.Button(btn_frame, text="❌ Exit", command=exit_app, font=("Arial", 16), bg="#cc0000", fg="white").pack(side=tk.LEFT, padx=10)
+
+
+
+
 
 # Main Panels
 main_frame = tk.Frame(root)

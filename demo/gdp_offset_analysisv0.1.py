@@ -54,9 +54,8 @@ def compute_and_plot():
         land_area = np.array(parse_input_data(land_input.get("1.0", tk.END).strip()))
         emissions = np.array(parse_input_data(emission_input.get("1.0", tk.END).strip()))
         years_offset = parse_input_data(years_input.get("1.0", tk.END).strip())
-        gdp = np.array(parse_input_data(gdp_input.get("1.0", tk.END).strip()))
 
-        if not (len(countries) == len(land_area) == len(emissions) == len(gdp)):
+        if not (len(countries) == len(land_area) == len(emissions)):
             messagebox.showerror("Data Error", "All input lists must have the same length.")
             return
 
@@ -74,10 +73,9 @@ def compute_and_plot():
         bamboo_area_needed = emissions / sequestration_rate
         bamboo_area_needed_annually = bamboo_area_needed / n_years_offset
         percent_land = (bamboo_area_needed / land_area) * 100
-        planting_cost = bamboo_area_needed_annually * cost_planting_bamboo
 
-        # Calculate GDP Percentage
-        gdp_percentage = (planting_cost / gdp) * 100
+        # Calculate planting cost
+        planting_cost = bamboo_area_needed_annually * cost_planting_bamboo
 
         # Clear previous plot
         ax.clear()
@@ -100,51 +98,19 @@ def compute_and_plot():
                            color=palette[2], alpha=0.9, edgecolor='black',
                            label='Annual Planting Cost (USD)')
 
-        # Annotations with text at the bottom of each bar at 45-degree rotation
-
-
-        # Add rotated labels BELOW each bar with explicit units
-        for i, (land, bamboo, cost, percent, gdp_pct) in enumerate(zip(land_area, bamboo_area_needed_annually, planting_cost, percent_land, gdp_percentage)):
-            ax.text(x[i] - bar_width, 1, 
-                    f"{format_large_num(land)}\nsq mi", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', rotation=45, transform=ax.get_xaxis_transform())
-
-            ax.text(x[i], 1, 
-                    f"{format_large_num(bamboo)}\nsq mi/yr (bamboo)", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', rotation=45, transform=ax.get_xaxis_transform())
-
-            ax.text(x[i] + bar_width, 1, 
-                    f"${format_large_num(cost)}\n$/yr", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', rotation=45, transform=ax.get_xaxis_transform())
-
-            ax.text(x[i] + bar_width, 0.95, 
-                    f"{gdp_pct:.2f}% of GDP", 
-                    ha='center', va='top', fontsize=10, fontweight='bold', color='red',
-                    rotation=45, transform=ax.get_xaxis_transform())
-
-
-
-        # for i, (land, bamboo, cost, percent, gdp_pct) in enumerate(zip(land_area, bamboo_area_needed_annually, planting_cost, percent_land, gdp_percentage)):
-        #     ax.text(x[i] - bar_width, -land * 0.05, 
-        #             f"{format_large_num(land)} sq mi", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold', rotation=45)
-        #     ax.text(x[i], -bamboo * 0.05, 
-        #             f"{format_large_num(bamboo)} sq mi/yr\n({percent:.2f}% of land)", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold',
-        #             bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'), rotation=45)
-        #     ax.text(x[i] + bar_width, -cost * 0.05, 
-        #             f"${format_large_num(cost)}", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold',
-        #             bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'), rotation=45)
-        #     ax.text(x[i] + bar_width, -cost * 0.10, 
-        #             f"{gdp_pct:.2f}% of GDP", 
-        #             ha='center', va='top', fontsize=10, fontweight='bold',
-        #             color='red', bbox=dict(facecolor='white', alpha=0.7, edgecolor='none'), rotation=45)
-
-
-
-
-
+        # Annotations
+        for i, (land, bamboo, cost, percent) in enumerate(zip(land_area, bamboo_area_needed_annually, planting_cost, percent_land)):
+            ax.text(x[i] - bar_width, land * 1.05, 
+                    f"{format_large_num(land)} sq mi", 
+                    ha='center', va='bottom', fontsize=10, fontweight='bold')
+            ax.text(x[i], bamboo * 1.05, 
+                    f"{format_large_num(bamboo)} sq mi/yr\n({percent:.2f}% of land)", 
+                    ha='center', va='bottom', fontsize=10, fontweight='bold',
+                    bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
+            ax.text(x[i] + bar_width, cost * 1.05, 
+                    f"${format_large_num(cost)}", 
+                    ha='center', va='bottom', fontsize=10, fontweight='bold',
+                    bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
 
         # Aesthetics
         ax.set_title(f"National Land vs. Bamboo Area Needed Annually and Planting Cost\nOffset CO₂ Emissions from {start_year} to {end_year}", 
@@ -163,7 +129,7 @@ def compute_and_plot():
             Patch(facecolor=palette[1], label='Annual Bamboo Area Needed', edgecolor='black'),
             Patch(facecolor=palette[2], label='Annual Planting Cost (USD)', edgecolor='black'),
         ]
-        ax.legend(handles=legend_elements, loc='lower right', fontsize=11)
+        ax.legend(handles=legend_elements, loc='upper right', fontsize=11)
 
         # Watermark
         ax.text(0.1, 0.7, 'BHCC 2025', fontsize=20, color='gray', alpha=0.5,
@@ -189,19 +155,16 @@ def compute_and_plot():
         summary_text += f"• Bamboo Area Annually = Bamboo Area / n_years_offset\n"
         summary_text += f"• Land % = Bamboo Area / Land Area × 100\n"
         summary_text += f"• Annual Planting Cost = Bamboo Area Annually × ${cost_planting_bamboo:,.0f} per sq mi\n"
-        summary_text += f"• GDP % = Annual Planting Cost / GDP × 100\n"
         summary_text += f"\nDetailed Calculations for Each Country:\n"
 
         for i in range(len(countries)):
             bamboo_area = bamboo_area_needed_annually[i]
             cost = planting_cost[i]
             percent_of_land = percent_land[i]
-            gdp_pct = gdp_percentage[i]
             summary_text += f"\n{countries[i]}:\n"
             summary_text += f"  • Annual Bamboo Area Needed = {format_large_num(bamboo_area)} sq mi/yr\n"
             summary_text += f"  • Annual Planting Cost = ${format_large_num(cost)}\n"
             summary_text += f"  • Percent of Total Land = {percent_of_land:.2f}%\n"
-            summary_text += f"  • GDP Percentage = {gdp_pct:.2f}%\n"
 
         summary_label.config(text=summary_text)
 
@@ -259,6 +222,10 @@ btn_frame.pack(pady=10)
 tk.Button(btn_frame, text="🔍 Analyze", command=compute_and_plot, font=("Arial", 16), bg="#007acc", fg="white").pack(side=tk.LEFT, padx=10)
 tk.Button(btn_frame, text="💾 Save Plot", command=save_plot, font=("Arial", 16), bg="#28a745", fg="white").pack(side=tk.LEFT, padx=10)
 tk.Button(btn_frame, text="❌ Exit", command=exit_app, font=("Arial", 16), bg="#cc0000", fg="white").pack(side=tk.LEFT, padx=10)
+
+
+
+
 
 # Main Panels
 main_frame = tk.Frame(root)

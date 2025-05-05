@@ -1,9 +1,9 @@
 git --version
 git add .
-git commit -m "'alow user to add data'"
+git commit -m "'Add gdp_per_country '"
 git push origin main
 
 :: === Tagging for GitHub Actions Release Build ===
-git tag v1.0
-git push origin v1.0
+git tag v1.1
+git push origin v1.1
 pause
