@@ -10,7 +10,7 @@ from matplotlib.patches import Patch
 
 # Initialize main window
 root = tk.Tk()
-root.title("🌿 Bamboo CO₂ Offset Calculator")
+root.title("🌿 Bamboo CO₂ Offset Calculator By AJ")
 root.geometry("2500x1750")  # Same size as before
 
 # Matplotlib figure and axis
