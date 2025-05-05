@@ -9,7 +9,7 @@
 
 This elegant app simplifies complex carbon sequestration math into interactive, intuitive visuals for comparative analysis. A must-have for green policy modeling and sustainability education.
 
-![Screenshot](screenshots/BambooCalculatorScreenshot.png)
+![Screenshot](screenshots/BambooCalculator/Screenshot.png)
 
 ---
 
@@ -89,7 +89,7 @@ These values are displayed in the plot for transparency and educational use.
 
 ## 📷 Example Output
 
-![App Screenshot](screenshots/BambooCalculatorScreenshot.png)
+![App Screenshot](screenshots/BambooCalculator/Screenshot.png)
 
 ---
 
