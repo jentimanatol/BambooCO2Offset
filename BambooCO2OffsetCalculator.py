@@ -276,4 +276,9 @@ summary_label = tk.Label(right_panel, text="", bg="#f0f6ff", justify="left", fon
 summary_label.pack(pady=(0, 10), fill=tk.X)
 
 # Run main loop
+#root.mainloop()
+
+# Ensure full shutdown when window is closed
+root.protocol("WM_DELETE_WINDOW", exit_app)
+
 root.mainloop()
