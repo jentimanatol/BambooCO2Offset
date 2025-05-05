@@ -9,14 +9,15 @@
 
 This elegant app simplifies complex carbon sequestration math into interactive, intuitive visuals for comparative analysis. A must-have for green policy modeling and sustainability education.
 
-![Screenshot](screenshots/Screenshot.png)
+![Screenshot](screenshots/Screenshot1.png)
+![Screenshot](screenshots/Screenshot2.png)
 
 ---
 
 ## 🔽 Download
 
 📦 Get the latest release here:  
-➡️ **[Download v1.6 for Windows (.exe)](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases/download/v1.6/BambooCO2OffsetCalculator.exe)**
+➡️ **[Download v2.1 for Windows (.exe)](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases/download/v2.1/BambooCO2OffsetCalculator.exe)**
 
 🕰️ Looking for earlier versions or source code?  
 🔍 **[Browse all releases](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases)**
