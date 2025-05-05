@@ -8,9 +8,16 @@ import seaborn as sns
 from matplotlib.ticker import FuncFormatter
 from matplotlib.patches import Patch
 
+import tkinter as tk
+from tkinter import messagebox, filedialog
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
+import numpy as np
+import ast
+
 # Initialize main window
 root = tk.Tk()
-root.title("🌿 Bamboo CO₂ Offset Calculator By AJ")
+root.title("🌿 Bamboo CO2 Offset Calculator By AJ")
 root.geometry("2500x1750")  # Same size as before
 
 # Matplotlib figure and axis
