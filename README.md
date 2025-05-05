@@ -16,7 +16,7 @@ This elegant app simplifies complex carbon sequestration math into interactive, 
 ## 🔽 Download
 
 📦 Get the latest release here:  
-➡️ **[Download v1.3 for Windows (.exe)](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases/download/v1.3/BambooCO2OffsetCalculator.exe)**
+➡️ **[Download v1.5 for Windows (.exe)](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases/download/v1.5/BambooCO2OffsetCalculator.exe)**
 
 🕰️ Looking for earlier versions or source code?  
 🔍 **[Browse all releases](https://github.com/jentimanatol/BambooCO2OffsetCalculator/releases)**
