@@ -1,6 +1,4 @@
-from pathlib import Path
 
-readme_content = """
 # 🎍 Bamboo CO₂ Offset Calculator
 
 [![GitHub release](https://img.shields.io/github/v/release/jentimanatol/BambooCO2Offset)](https://github.com/jentimanatol/BambooCO2Offset/releases)
